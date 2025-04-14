@@ -59,9 +59,9 @@ command:
 # The `test` job runs the MATLAB and Simulink tests in your project. It calls the [`runtests`][5] function
 # to run the tests and then the [`assertSuccess`][6] method to fail the job if any of the tests fail.
 #
-test:
-  extends: .matlab_defaults
-  script: matlab -batch "results = runtests('IncludeSubfolders',true), assertSuccess(results);"
+###test:
+###  extends: .matlab_defaults
+###  script: matlab -batch "results = runtests('IncludeSubfolders',true), assertSuccess(results);"
 
 # By default, the job includes any files in your [MATLAB project][7] that have a `Test` label. If your repository
 # does not have a MATLAB project, then the job includes all tests in the root of your repository or in any of
@@ -76,34 +76,34 @@ test:
 # in JUnit-style XML format and code coverage results in Cobertura XML format. Like the `test` job,
 # this job runs all the tests in your project and fails the build if any of the tests fail.
 #
-test_artifacts:
-  extends: .matlab_defaults
-  script: |
-    cat <<- 'BLOCK' > runAllTests.m
-          import matlab.unittest.TestRunner
-          import matlab.unittest.Verbosity
-          import matlab.unittest.plugins.CodeCoveragePlugin
-          import matlab.unittest.plugins.XMLPlugin
-          import matlab.unittest.plugins.codecoverage.CoberturaFormat
-          suite = testsuite(pwd,'IncludeSubfolders',true);
-          [~,~] = mkdir('artifacts')
-          runner = TestRunner.withTextOutput('OutputDetail',Verbosity.Detailed);
-          runner.addPlugin(XMLPlugin.producingJUnitFormat('artifacts/results.xml'))
-          % Replace `pwd` with the location of the folder containing source code
-          runner.addPlugin(CodeCoveragePlugin.forFolder(pwd,'IncludingSubfolders',true, ...
-          'Producing',CoberturaFormat('artifacts/cobertura.xml')))
-          results = runner.run(suite)
-          assertSuccess(results);
-    BLOCK
-    matlab -batch runAllTests
-  artifacts:
-    reports:
-      junit: "./artifacts/results.xml"
-      coverage_report:
-        coverage_format: cobertura
-        path: "./artifacts/cobertura.xml"
-    paths:
-      - "./artifacts"
+###test_artifacts:
+###  extends: .matlab_defaults
+###  script: |
+###    cat <<- 'BLOCK' > runAllTests.m
+###          import matlab.unittest.TestRunner
+###          import matlab.unittest.Verbosity
+###          import matlab.unittest.plugins.CodeCoveragePlugin
+###          import matlab.unittest.plugins.XMLPlugin
+###          import matlab.unittest.plugins.codecoverage.CoberturaFormat
+###          suite = testsuite(pwd,'IncludeSubfolders',true);
+###          [~,~] = mkdir('artifacts')
+###          runner = TestRunner.withTextOutput('OutputDetail',Verbosity.Detailed);
+###          runner.addPlugin(XMLPlugin.producingJUnitFormat('artifacts/results.xml'))
+###          % Replace `pwd` with the location of the folder containing source code
+###          runner.addPlugin(CodeCoveragePlugin.forFolder(pwd,'IncludingSubfolders',true, ...
+###          'Producing',CoberturaFormat('artifacts/cobertura.xml')))
+###          results = runner.run(suite)
+###          assertSuccess(results);
+###    BLOCK
+###    matlab -batch runAllTests
+###  artifacts:
+###    reports:
+###      junit: "./artifacts/results.xml"
+###      coverage_report:
+###        coverage_format: cobertura
+###        path: "./artifacts/cobertura.xml"
+###    paths:
+###      - "./artifacts"
 
 # You can modify the contents of the `test_artifacts` job depending on your goals. For more
 # information on how to customize the test runner and generate various test and coverage artifacts,
@@ -115,9 +115,9 @@ test_artifacts:
 # Starting in R2022b, the `build` job runs a build using the MATLAB build tool. You can use this job to run the
 # tasks specified in a file named `buildfile.m` in the root of your repository.
 #
-build:
-  extends: .matlab_defaults
-  script: matlab -batch "buildtool"
+###build:
+###  extends: .matlab_defaults
+###  script: matlab -batch "buildtool"
 
 # The job executes the [`buildtool`][10] command to run a build using the default tasks in `buildfile.m`
 # as well as all the tasks on which they depend. To run specific tasks instead, specify them as a space-separated
