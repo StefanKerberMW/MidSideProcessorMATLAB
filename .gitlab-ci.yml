@@ -41,7 +41,7 @@
 #
 command:
   extends: .matlab_defaults
-  script: matlab -batch "mycommand"
+  script: matlab -batch "ver"
 
 # If you specify more than one script, function, or statement, use a comma or semicolon to separate them.
 # For example, to run `myscript.m` in a folder named `myfolder` located in the root of the repository,
