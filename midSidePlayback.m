@@ -10,9 +10,18 @@ fileReader = dsp.AudioFileReader(...
 deviceWriter = audioDeviceWriter(...
     "SampleRate", fileReader.SampleRate)
 
+%% Setup scope
+scope = timescope(...
+    "SampleRate", fileReader.SampleRate, ...
+    "TimeSpan", 2, ...
+    "BufferLength", fileReader.SampleRate*2*2,...
+    "YLimits", [-1, 1], ...
+    "TimeSpanOverrunAction", "Scroll")
+
+
 %% Setup GUI
 fig = uifigure()
-sl = uislider(fig, "Limits", [0, 3], "Orientation", "vertical")
+sl = uiknob(fig, "Limits", [0, 3], "Value", 1);
 
 %% Do the processing
 while (~isDone(fileReader))
@@ -21,10 +30,11 @@ while (~isDone(fileReader))
     drawnow()
     [sndLeft, sndRight] = midside2leftright(sndMid, sl.Value * sndSide);
     deviceWriter([sndLeft, sndRight]);
+    scope(sndLeft, sndRight)
 end
 
 %% Clean up
 close(fig)
 release(fileReader)
 release(deviceWriter)
-
+release(scope)
