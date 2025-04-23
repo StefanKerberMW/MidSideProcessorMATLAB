@@ -19,7 +19,7 @@ scope = timescope(...
     "TimeSpanOverrunAction", "Scroll")
 
 
-%% Setup GUI
+%% Setup simple GUI
 fig = uifigure()
 sl = uiknob(fig, "Limits", [0, 3], "Value", 1);
 
