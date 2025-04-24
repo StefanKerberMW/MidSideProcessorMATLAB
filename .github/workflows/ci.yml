@@ -35,14 +35,16 @@ jobs:
             Simulink_Test
       
       # Runs a command
-      - name: Run script
+      - name: Show MATLAB version and toolboxes
         uses: matlab-actions/run-command@v2
         with:
           command: ver
 
       # Runs a set of commands using the runners shell
       - name: Run all tests
+        id: doTests
         uses: matlab-actions/run-tests@v2
+
           
       ## Runs a set of commands using the runners shell
       ##- name: Run all tests
