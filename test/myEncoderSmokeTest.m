@@ -18,6 +18,6 @@ sndRight = randn(2048, 1);
 [sndMid, sndSide] = leftright2midside(sndLeft, sndRight);
 [encodedLeft, encodedRight] = midside2leftright(sndMid, sndSide);
 
-assert(max(abs(encodedLeft-sndLeft)) < tol)
-assert(max(abs(encodedRight-sndRight)) < tol)
+assert(max(abs(encodedLeft-sndLeft)) < tol);
+assert(max(abs(encodedRight-sndRight)) < tol);
 

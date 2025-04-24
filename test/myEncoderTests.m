@@ -15,7 +15,7 @@ function testSameSizeValidator(testCase)
     % Check if validation function for same sized vectors is working
     errID = "MidSideProcessor:UnequalSizeVectors";
     cmd = @() mustBeSameSize(ones(10,1), randn(11,1));
-    verifyError(testCase, cmd , errID)
+    verifyError(testCase, cmd , errID);
 end
 
 %% Test Mid/Side encoder
@@ -24,7 +24,7 @@ function testStereoInput(testCase)
     errID = "MATLAB:minrhs";
     tstLeft = ones(1024, 1);
     cmd = @() leftright2midside(tstLeft);
-    verifyError(testCase, cmd , errID)
+    verifyError(testCase, cmd , errID);
 end
 
 function testMidSideEqualWithZeroRightInput(testCase)
@@ -51,7 +51,7 @@ function testMidSideInput(testCase)
     errID = "MATLAB:minrhs";
     tstLeft = ones(testCase.TestData.sigDim, 1);
     cmd = @() midside2leftright(tstLeft);
-    verifyError(testCase, cmd , errID)
+    verifyError(testCase, cmd , errID);
 end
 
 function testLeftRightEqualWithZeroSideInput(testCase)
