@@ -7,3 +7,7 @@ This example implements a simple audio effect. It is implemented into a MATLAB P
 
 ## Project status
 Work in progress...
+
+### ToDos
+- Trigger CI action only for changes in code files
+- Add E-Mail notifications in case tests in CI system fail
